@@ -26,31 +26,35 @@ public class RedditQuickSubmitActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
         
         setContentView(R.layout.main);
         
-        Button submitImageButton = (Button) findViewById(R.id.submitImageButton); 
- 
-	alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Select Source");
+        Button submitImageButton = (Button) findViewById(R.id.submitImageButton); 	// Creates a button to be used using the 
+        										// properties specified in the XML file
+       
+	alertDialog = new AlertDialog.Builder(this);					// Creates a new AlertDialog for the popup
+        alertDialog.setTitle("Select Source");						// Sets its title
         
-        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
+        
+        alertDialog.setItems(items, new DialogInterface.OnClickListener() {		
             public void onClick(DialogInterface dialog, int item) {
         	startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);  
             }
         });
         
-        submitImageButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog myalert = alertDialog.create();
+        submitImageButton.setOnClickListener(new OnClickListener() {			// Listens for a button click on the
+            @Override									// Submit Image button. 
+            public void onClick(View v) {						// 
+                AlertDialog myalert = alertDialog.create();				// Opens the Alert Dialog above if click on. 
                 myalert.show();
             }
                 
         });
-       
+        
     }
+    
+    // Below is work in progress. Add to it if you wish. 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == CAMERA_PIC_REQUEST) {
