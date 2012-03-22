@@ -16,6 +16,7 @@ public class SubmitImageActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
         setContentView(R.layout.submitimage);
   
+        // Use the picture from the camera and display it as a thumbnail in the ImageView
         this.imageView = (ImageView)this.findViewById(R.id.cameraPhoto);
         imageView.setImageBitmap(RedditQuickSubmitActivity.photo);
     }
