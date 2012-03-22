@@ -18,9 +18,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class RedditQuickSubmitActivity extends Activity { 
-	
-	private AlertDialog.Builder alertDialog;
+public class RedditQuickSubmitActivity extends Activity {
 	
 	
 	final CharSequence[] items = {"Camera", "Gallery"}; 	// This is used for the AlertDialog
@@ -43,49 +41,16 @@ public class RedditQuickSubmitActivity extends Activity {
 		Button submitLinkButton = (Button) findViewById(R.id.submitLinkButton);
 		
 		
-		alertDialog = new AlertDialog.Builder(this);					// Creates a new AlertDialog for the popup
-		alertDialog.setTitle("Select Source");							// Sets its title
 		
-		
-		alertDialog.setItems(items, new DialogInterface.OnClickListener() {		
-			public void onClick(DialogInterface dialog, int item) {
-				if(item == 0) {
-					startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST); 
-				}
-			}
-			
-		});
 		
 	   
 		
-		submitImageButton.setOnClickListener(new OnClickListener() {			// Listens for a button click on the
-			@Override															// Submit Image button. 
-			public void onClick(View v) {										// 
-				AlertDialog myalert = alertDialog.create();						// Opens the Alert Dialog above if click on. 
-				myalert.show();
-			}
-				
-		});
+		submitImageButton.setOnClickListener(new SubmitImageOnClickListener());
 		
 		
-		submitTextButton.setOnClickListener(new OnClickListener() {			
-			@Override									
-			public void onClick(View v) {						
-			Intent myIntent = new Intent(v.getContext(), SubmitTextActivity.class);
-				startActivityForResult(myIntent, 0);
-			}
-				
-		});
+		submitTextButton.setOnClickListener(new SubmitTextOnClickListener());
 		
-		
-		submitLinkButton.setOnClickListener(new OnClickListener() {			
-			@Override									
-			public void onClick(View v) {						
-				Intent myIntent = new Intent(v.getContext(), SubmitLinkActivity.class);
-				startActivityForResult(myIntent, 0);
-			}
-				
-		});
+		submitLinkButton.setOnClickListener(new SubmitLinkOnClickListener());
 		
 	}
 	
@@ -105,6 +70,42 @@ public class RedditQuickSubmitActivity extends Activity {
 				startActivity(cameraSubmit);
 				
 			}
+		}
+	}
+	
+	private class SubmitImageOnClickListener implements OnClickListener {
+		// Listens for a button click on the
+		@Override															// Submit Image button. 
+		public void onClick(View v) {
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());					// Creates a new AlertDialog for the popup
+			alertDialog.setTitle("Select Source");							// Sets its title
+			
+			
+			alertDialog.setItems(items, new DialogInterface.OnClickListener() {		
+				public void onClick(DialogInterface dialog, int item) {
+					if(item == 0) {
+						startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST); 
+					}
+				}
+			});
+			AlertDialog myalert = alertDialog.create();						// Opens the Alert Dialog above if click on. 
+			myalert.show();
+		}
+	}
+	
+	private class SubmitTextOnClickListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			Intent myIntent = new Intent(v.getContext(), SubmitTextActivity.class);
+			startActivityForResult(myIntent, 0);
+		}
+	}
+	
+	private class SubmitLinkOnClickListener implements OnClickListener {	
+		@Override
+		public void onClick(View v) {						
+			Intent myIntent = new Intent(v.getContext(), SubmitLinkActivity.class);
+			startActivityForResult(myIntent, 0);
 		}
 	}
 }
