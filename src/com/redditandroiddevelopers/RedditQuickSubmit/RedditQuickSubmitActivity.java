@@ -20,7 +20,6 @@ public class RedditQuickSubmitActivity extends Activity {
     // This is used for the AlertDialog
     final CharSequence[] items = { "Camera", "Gallery" }; 
     
- 
     // This is where the image captured from the camera is stored.
     public static final int CAMERA_PIC_REQUEST = 0; 
     public static String imageid;
@@ -55,7 +54,6 @@ public class RedditQuickSubmitActivity extends Activity {
 		    // Open Gallery
 		}
 	    }
-
 	});
 	
 	// Listener for the Image button
@@ -75,7 +73,6 @@ public class RedditQuickSubmitActivity extends Activity {
 			SubmitTextActivity.class);
 		startActivityForResult(myIntent, 0);
 	    }
-
 	});
 
 	// Listener for the Link button
@@ -86,11 +83,8 @@ public class RedditQuickSubmitActivity extends Activity {
 			SubmitLinkActivity.class);
 		startActivityForResult(myIntent, 0);
 	    }
-
 	});
-
     }
-
     
     // This gets the result from the camera (i.e. the picture) 
     @Override
