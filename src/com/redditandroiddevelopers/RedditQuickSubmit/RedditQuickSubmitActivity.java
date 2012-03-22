@@ -1,4 +1,4 @@
-package com.rad.RedditQuickSubmit;
+package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import com.rad.RedditQuickSubmit.R;
+
+import com.redditandroiddevelopers.RedditQuickSubmit.R;
 
 public class RedditQuickSubmitActivity extends Activity {
 
@@ -108,3 +109,4 @@ public class RedditQuickSubmitActivity extends Activity {
 	}
     }
 }
+
