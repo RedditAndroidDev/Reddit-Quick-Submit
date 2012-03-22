@@ -36,20 +36,14 @@ public class RedditQuickSubmitActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		
+		//Bind to the initialized buttons
 		Button submitImageButton = (Button) findViewById(R.id.submitImageButton); 	// Creates buttons to be used using the 
 		Button submitTextButton = (Button) findViewById(R.id.submitTextButton);		// properties specified in the XML file
 		Button submitLinkButton = (Button) findViewById(R.id.submitLinkButton);
 		
-		
-		
-		
-	   
-		
+		//And assign their respective click listeners
 		submitImageButton.setOnClickListener(new SubmitImageOnClickListener());
-		
-		
 		submitTextButton.setOnClickListener(new SubmitTextOnClickListener());
-		
 		submitLinkButton.setOnClickListener(new SubmitLinkOnClickListener());
 		
 	}
