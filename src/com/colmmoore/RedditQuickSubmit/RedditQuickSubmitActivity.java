@@ -24,7 +24,7 @@ public class RedditQuickSubmitActivity extends Activity {
     
     
     final CharSequence[] items = {"Camera", "Gallery"}; 	// This is used for the AlertDialog
-    public static final int CAMERA_PIC_REQUEST = 0; 		// This is where the image captured from the camera is stored.
+    public static final int CAMERA_PIC_REQUEST = 0; 		// This is the activity request code necessary for startActivityForResult(Intent);
     public static String imageid;
     public static Intent data;
     public static Bitmap photo;
