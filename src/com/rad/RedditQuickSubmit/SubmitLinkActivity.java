@@ -1,29 +1,20 @@
-package com.colmmoore.RedditQuickSubmit;
+package com.rad.RedditQuickSubmit;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
+import com.rad.RedditQuickSubmit.R;
 
-public class SubmitTextActivity extends Activity { 
+public class SubmitLinkActivity extends Activity { 
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
-        setContentView(R.layout.submittext);
+        setContentView(R.layout.submitlink);
+        
+        
         
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
