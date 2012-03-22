@@ -17,15 +17,3 @@ public class SubmitTextActivity extends Activity {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-

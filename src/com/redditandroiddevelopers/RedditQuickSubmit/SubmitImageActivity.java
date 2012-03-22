@@ -22,15 +22,3 @@ public class SubmitImageActivity extends Activity {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
