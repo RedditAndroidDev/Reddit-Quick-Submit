@@ -49,7 +49,7 @@ public class RedditQuickSubmitActivity extends Activity {
 		
 		alertDialog.setItems(items, new DialogInterface.OnClickListener() {		
 			public void onClick(DialogInterface dialog, int item) {
-				if(item == 0){
+				if(item == 0) {
 					startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST); 
 				}
 			}
@@ -97,13 +97,13 @@ public class RedditQuickSubmitActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAMERA_PIC_REQUEST) {
 			if (data != null) {
+				
+				Bitmap photo = (Bitmap) data.getExtras().get("data"); 
 			
-			Bitmap photo = (Bitmap) data.getExtras().get("data"); 
-		
-			Intent cameraSubmit = new Intent(RedditQuickSubmitActivity.this, SubmitImageActivity.class);
-			cameraSubmit.putExtra("data", photo);
-			startActivity(cameraSubmit);
-			
+				Intent cameraSubmit = new Intent(RedditQuickSubmitActivity.this, SubmitImageActivity.class);
+				cameraSubmit.putExtra("data", photo);
+				startActivity(cameraSubmit);
+				
 			}
 		}
 	}
