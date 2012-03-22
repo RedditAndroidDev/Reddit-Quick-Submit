@@ -1,21 +1,14 @@
 package com.colmmoore.RedditQuickSubmit;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 
 public class RedditQuickSubmitActivity extends Activity { 
@@ -96,7 +89,7 @@ public class RedditQuickSubmitActivity extends Activity {
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	if (requestCode == CAMERA_PIC_REQUEST) {
+	if (resultCode == RESULT_OK && requestCode == CAMERA_PIC_REQUEST) {
 	    if (data != null) {
 		
 		photo = (Bitmap) data.getExtras().get("data"); 
