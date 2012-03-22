@@ -18,9 +18,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class RedditQuickSubmitActivity extends Activity { 
-	
-	private AlertDialog.Builder alertDialog;
+public class RedditQuickSubmitActivity extends Activity {
 	
 	
 	final CharSequence[] items = {"Camera", "Gallery"}; 	// This is used for the AlertDialog
@@ -43,7 +41,7 @@ public class RedditQuickSubmitActivity extends Activity {
 		Button submitLinkButton = (Button) findViewById(R.id.submitLinkButton);
 		
 		
-		alertDialog = new AlertDialog.Builder(this);					// Creates a new AlertDialog for the popup
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);					// Creates a new AlertDialog for the popup
 		alertDialog.setTitle("Select Source");							// Sets its title
 		
 		
