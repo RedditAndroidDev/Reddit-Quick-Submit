@@ -15,22 +15,28 @@ import com.redditandroiddevelopers.RedditQuickSubmit.R;
 
 public class RedditQuickSubmitActivity extends Activity {
 
+    // Create a new instace of AlertDialog called 'alertDialog' to be used later.
     private AlertDialog.Builder alertDialog;
 
     // This is used for the AlertDialog
     final CharSequence[] items = { "Camera", "Gallery" }; 
     
-    // This is where the image captured from the camera is stored.
+    // Create variables to be used by the camera intent
     public static final int CAMERA_PIC_REQUEST = 0; 
     public static String imageid;
     public static Intent data;
     public static Bitmap photo;
 
+    // Create the camera intent be be called later when the user selects the camera
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
+    
+    // Start the main activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	// Remove the title from the window; it doesn't look good. 
 	requestWindowFeature(Window.FEATURE_NO_TITLE); 
 	setContentView(R.layout.main);
 	
@@ -55,7 +61,7 @@ public class RedditQuickSubmitActivity extends Activity {
 	    }
 	});
 	
-	// Listener for the Image button
+	// Listener for the Image buttonn to open the corresponding activity
 	submitImageButton.setOnClickListener(new OnClickListener() { 				     
 	    @Override
 	    public void onClick(View v) { 
@@ -64,7 +70,7 @@ public class RedditQuickSubmitActivity extends Activity {
 	    }
 	});
 
-	// Listener for the Text button
+	// Listener for the Text button to open the corresponding activity
 	submitTextButton.setOnClickListener(new OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
@@ -74,7 +80,7 @@ public class RedditQuickSubmitActivity extends Activity {
 	    }
 	});
 
-	// Listener for the Link button
+	// Listener for the Link button to open the corresponding activity
 	submitLinkButton.setOnClickListener(new OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
@@ -85,7 +91,7 @@ public class RedditQuickSubmitActivity extends Activity {
 	});
     }
     
-    // This gets the result from the camera (i.e. the picture) 
+    // This gets the result from the camera (i.e. the picture) when it is called
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == CAMERA_PIC_REQUEST) {

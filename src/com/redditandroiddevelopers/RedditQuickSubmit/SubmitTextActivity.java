@@ -11,9 +11,8 @@ public class SubmitTextActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.submittext);
-        
     }
     
 }
