@@ -2,28 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
+    android:background="@layout/background"
+    android:orientation="vertical" 
+    android:padding="10dip" >
 
-    <Button
-        android:id="@+id/submitImageButton"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:text="Image" />
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/titleForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" >
+
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/bodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Text (Optional)"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />    
+
+    <EditText
+        android:id="@+id/bodyForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.24"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/subredditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Subreddit"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <EditText
+        android:id="@+id/subredditForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/submitTextButton"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:text="Text" />
-
-    <Button
-        android:id="@+id/submitLinkButton"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:text="Link" />
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Submit!" />
 
 </LinearLayout>
