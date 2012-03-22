@@ -91,7 +91,7 @@ public class RedditQuickSubmitActivity extends Activity {
     }
 
     
-    // This gets the result from the camera (i.e. the picture)
+    // This gets the result from the camera (i.e. the picture) 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == CAMERA_PIC_REQUEST) {
