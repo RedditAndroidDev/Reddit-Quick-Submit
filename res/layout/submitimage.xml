@@ -2,7 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
-
+    android:background="@layout/background"
+    android:orientation="vertical" 
+    android:padding="10dip" >
+    
+    <ImageView android:id="@+id/cameraPhoto" 
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content">
+    </ImageView>
+    
 </LinearLayout>

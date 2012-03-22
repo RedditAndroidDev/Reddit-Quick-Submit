@@ -1,11 +1,18 @@
 package com.colmmoore.RedditQuickSubmit;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -17,8 +24,10 @@ public class RedditQuickSubmitActivity extends Activity {
     
     
     final CharSequence[] items = {"Camera", "Gallery"}; 	// This is used for the AlertDialog
-    private static final int CAMERA_PIC_REQUEST = 1337; 	// This is where the image captured from the camera is stored. Still
-    								// gotta figure this but out. 
+    public static final int CAMERA_PIC_REQUEST = 0; 		// This is where the image captured from the camera is stored.
+    public static String imageid;
+    public static Intent data;
+    public static Bitmap photo;
     
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);  
     
@@ -26,11 +35,7 @@ public class RedditQuickSubmitActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
         requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
-        
-        
         setContentView(R.layout.main);
         
         
@@ -45,10 +50,14 @@ public class RedditQuickSubmitActivity extends Activity {
         
         alertDialog.setItems(items, new DialogInterface.OnClickListener() {		
             public void onClick(DialogInterface dialog, int item) {
-        	startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);  
-            }
+        	if(item == 0){
+        	    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST); 
+        	}   
+           }
+            
         });
         
+       
         
         submitImageButton.setOnClickListener(new OnClickListener() {			// Listens for a button click on the
             @Override									// Submit Image button. 
@@ -81,16 +90,23 @@ public class RedditQuickSubmitActivity extends Activity {
         
     }
     
+    // A lot of this code is experimental, can someone improve upon it maybe? I'm trying to get the image the camera took
+    // and open a new Activity displaying that image. Once we get that working, we can add a text box for title, and then a 
+    // submit button at the top. 
     
-    // Below is work in progress. Add to it if you wish. 
-
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (requestCode == CAMERA_PIC_REQUEST) {
-	    Bitmap thumbnail = (Bitmap) data.getExtras().get("data");  
+	    if (data != null) {
+		
+		photo = (Bitmap) data.getExtras().get("data"); 
+	
+		Intent cameraSubmit = new Intent(RedditQuickSubmitActivity.this, SubmitImageActivity.class);
+		startActivity(cameraSubmit);
+		
+	    }
 	}
     }
-
-   
 }
     
     
