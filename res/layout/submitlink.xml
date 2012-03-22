@@ -2,7 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
+    android:background="@layout/background"
+    android:orientation="vertical" 
+    android:padding="10dip" >
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/titleForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" >
+
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/linkText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />    
+
+    <EditText
+        android:id="@+id/linkForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/subredditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Subreddit"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <EditText
+        android:id="@+id/subredditForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submitTextButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="Submit!" />
 
 </LinearLayout>
