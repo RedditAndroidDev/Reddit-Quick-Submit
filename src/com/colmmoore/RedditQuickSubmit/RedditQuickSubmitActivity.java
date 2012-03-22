@@ -27,7 +27,6 @@ public class RedditQuickSubmitActivity extends Activity {
     public static final int CAMERA_PIC_REQUEST = 0; 		// This is the activity request code necessary for startActivityForResult(Intent);
     public static String imageid;
     public static Intent data;
-    public static Bitmap photo;
     
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);  
     
@@ -99,9 +98,10 @@ public class RedditQuickSubmitActivity extends Activity {
 	if (requestCode == CAMERA_PIC_REQUEST) {
 	    if (data != null) {
 		
-		photo = (Bitmap) data.getExtras().get("data"); 
+		Bitmap photo = (Bitmap) data.getExtras().get("data"); 
 	
 		Intent cameraSubmit = new Intent(RedditQuickSubmitActivity.this, SubmitImageActivity.class);
+		cameraSubmit.putExtra("data", photo);
 		startActivity(cameraSubmit);
 		
 	    }

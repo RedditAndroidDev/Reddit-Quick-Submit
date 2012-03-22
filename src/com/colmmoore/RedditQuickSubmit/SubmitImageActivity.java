@@ -25,7 +25,10 @@ public class SubmitImageActivity extends Activity {
         setContentView(R.layout.submitimage);
   
         this.imageView = (ImageView)this.findViewById(R.id.cameraPhoto);
-        imageView.setImageBitmap(RedditQuickSubmitActivity.photo);
+        
+        Bitmap photo = (Bitmap) getIntent().getExtras().get("data");
+        if (photo != null) 
+        	imageView.setImageBitmap(photo);
     }
     
 }
