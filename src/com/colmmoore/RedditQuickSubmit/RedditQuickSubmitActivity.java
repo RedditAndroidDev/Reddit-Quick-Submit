@@ -22,17 +22,23 @@ public class RedditQuickSubmitActivity extends Activity {
     
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);  
     
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        
         requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
+        
         
         setContentView(R.layout.main);
         
-        Button submitImageButton = (Button) findViewById(R.id.submitImageButton); 	// Creates a button to be used using the 
-        										// properties specified in the XML file
-       
+        
+        Button submitImageButton = (Button) findViewById(R.id.submitImageButton); 	// Creates buttons to be used using the 
+        Button submitTextButton = (Button) findViewById(R.id.submitTextButton);		// properties specified in the XML file
+        Button submitLinkButton = (Button) findViewById(R.id.submitLinkButton);
+        
+        
 	alertDialog = new AlertDialog.Builder(this);					// Creates a new AlertDialog for the popup
         alertDialog.setTitle("Select Source");						// Sets its title
         
@@ -43,6 +49,7 @@ public class RedditQuickSubmitActivity extends Activity {
             }
         });
         
+        
         submitImageButton.setOnClickListener(new OnClickListener() {			// Listens for a button click on the
             @Override									// Submit Image button. 
             public void onClick(View v) {						// 
@@ -52,7 +59,28 @@ public class RedditQuickSubmitActivity extends Activity {
                 
         });
         
+        
+        submitTextButton.setOnClickListener(new OnClickListener() {			
+            @Override									
+            public void onClick(View v) {						
+        	Intent myIntent = new Intent(v.getContext(), SubmitTextActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+                
+        });
+        
+        
+        submitLinkButton.setOnClickListener(new OnClickListener() {			
+            @Override									
+            public void onClick(View v) {						
+        	Intent myIntent = new Intent(v.getContext(), SubmitLinkActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+                
+        });
+        
     }
+    
     
     // Below is work in progress. Add to it if you wish. 
 
