@@ -20,10 +20,18 @@
         </activity>
         <activity android:name=".SubmitTextActivity"></activity>
         <activity android:name=".SubmitLinkActivity"></activity>
-        <activity android:name=".SubmitImageActivity"></activity>
+        <activity android:name=".SubmitCameraImageActivity"></activity>
+        <activity android:name=".SubmitSharedImageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
     </application>
     
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
  	<uses-feature android:name="android.hardware.camera" />
  	<uses-feature android:name="android.hardware.camera.autofocus" />
 

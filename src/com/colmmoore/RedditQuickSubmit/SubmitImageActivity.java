@@ -14,18 +14,12 @@ import android.provider.MediaStore;
 import android.view.Window;
 import android.widget.ImageView;
 
-public class SubmitImageActivity extends Activity { 
-    
-    private ImageView imageView;
-    
+public abstract class SubmitImageActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);  	// Hides the horrible title at the top of the app. 
         setContentView(R.layout.submitimage);
-  
-        this.imageView = (ImageView)this.findViewById(R.id.cameraPhoto);
-        imageView.setImageBitmap(RedditQuickSubmitActivity.photo);
     }
     
 }
