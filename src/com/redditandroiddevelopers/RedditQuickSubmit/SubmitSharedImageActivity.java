@@ -1,4 +1,4 @@
-package com.colmmoore.RedditQuickSubmit;
+package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -32,7 +32,7 @@ public class SubmitSharedImageActivity extends SubmitImageActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String action = intent.getAction();
-        
+
         if(action.equals(Intent.ACTION_SEND)){
             if(extras.containsKey(Intent.EXTRA_STREAM)){
                 try{
@@ -41,7 +41,7 @@ public class SubmitSharedImageActivity extends SubmitImageActivity {
                     ContentResolver content = getContentResolver();
                     Bitmap bmp = BitmapFactory.decodeStream(content.openInputStream(uri));
 
-                    
+
                     imageView = (ImageView) findViewById(R.id.cameraPhoto);
                     imageView.setImageBitmap(bmp);
                 }  catch (IOException iex){
@@ -52,14 +52,14 @@ public class SubmitSharedImageActivity extends SubmitImageActivity {
 
 
     }
-    
+
     private byte[] readStream(InputStream is) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();        
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[16384];
         int i;
         while((i = is.read(buffer,0,buffer.length)) != 1) {
             out.write(buffer,0,i);
-        }                                
+        }
         out.flush();
         return out.toByteArray();
     }

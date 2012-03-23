@@ -1,8 +1,10 @@
-package com.colmmoore.RedditQuickSubmit;
+package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
+
+import com.redditandroiddevelopers.RedditQuickSubmit.R;
 
 public class SubmitLinkActivity extends Activity { 
     

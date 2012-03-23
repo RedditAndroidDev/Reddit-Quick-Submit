@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top" >
 
-        <requestFocus />
+        
     </EditText>
     
     <TextView
@@ -50,6 +50,7 @@
     
     <EditText
         android:id="@+id/subredditForm"
+        android:hint="r/"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

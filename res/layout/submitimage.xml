@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@layout/background"
     android:orientation="vertical" 
     android:padding="10dip" >
     
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="#000"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/titleForm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleText"
+        android:layout_gravity="top" >
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/imageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preview"
+        android:textColor="#000"
+         android:layout_below="@+id/titleForm"
+        android:textAppearance="?android:attr/textAppearanceMedium" />  
+           
+        
     <ImageView android:id="@+id/cameraPhoto" 
-        android:layout_height="wrap_content" 
-        android:layout_width="wrap_content">
+        android:layout_height="fill_parent" 
+        android:layout_width="fill_parent"
+        android:layout_above="@+id/subredditText"
+        android:layout_below="@+id/imageText"
+		android:layout_gravity="center">
     </ImageView>
     
-</LinearLayout>
+	<TextView
+        android:id="@+id/subredditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Subreddit"
+        android:textColor="#000"
+        android:layout_above="@+id/subredditForm"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/subredditForm"
+        android:hint="r/"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submitTextButton"
+        android:layout_gravity="top" >
+    </EditText>
+    
+    <Button
+        android:id="@+id/submitTextButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Submit!" />
+    
+</RelativeLayout>

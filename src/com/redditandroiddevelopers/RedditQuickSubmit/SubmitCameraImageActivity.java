@@ -1,4 +1,4 @@
-package com.colmmoore.RedditQuickSubmit;
+package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.os.Bundle;
 import android.widget.ImageView;
