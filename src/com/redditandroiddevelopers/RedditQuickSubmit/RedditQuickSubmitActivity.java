@@ -58,6 +58,8 @@ public class RedditQuickSubmitActivity extends Activity {
 		if (item == 0) {
 		    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
 		} else if (item == 1){
+		    
+		    //Display message when clicking on gallery. Someone is working on this I believe. 
 		    Context context = getApplicationContext();
 		    CharSequence text = "Gallery functionality will be added soon!";
 		    int duration = Toast.LENGTH_SHORT;
@@ -68,7 +70,7 @@ public class RedditQuickSubmitActivity extends Activity {
 	    }
 	});
 	
-	// Listener for the Image buttonn to open the corresponding activity
+	// Listener for the Image button to open the corresponding activity
 	submitImageButton.setOnClickListener(new OnClickListener() { 				     
 	    @Override
 	    public void onClick(View v) { 
