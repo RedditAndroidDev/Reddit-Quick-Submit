@@ -2,6 +2,7 @@ package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.redditandroiddevelopers.RedditQuickSubmit.R;
 
@@ -56,7 +58,12 @@ public class RedditQuickSubmitActivity extends Activity {
 		if (item == 0) {
 		    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
 		} else if (item == 1){
-		    // Open Gallery
+		    Context context = getApplicationContext();
+		    CharSequence text = "Gallery functionality will be added soon!";
+		    int duration = Toast.LENGTH_SHORT;
+
+		    Toast toast = Toast.makeText(context, text, duration);
+		    toast.show();
 		}
 	    }
 	});
