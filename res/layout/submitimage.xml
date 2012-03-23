@@ -53,6 +53,7 @@
 
     <EditText
         android:id="@+id/subredditForm"
+        android:hint="r/"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/submitTextButton"
