@@ -50,8 +50,6 @@ public class SubmitSharedImageActivity extends SubmitImageActivity {
                 }
             }
         }
-
-
     }
 
     private byte[] readStream(InputStream is) throws IOException {

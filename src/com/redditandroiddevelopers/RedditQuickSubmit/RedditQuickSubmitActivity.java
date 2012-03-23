@@ -109,7 +109,7 @@ public class RedditQuickSubmitActivity extends Activity {
 
 		Intent cameraSubmit = new Intent(
 			RedditQuickSubmitActivity.this,
-			SubmitImageActivity.class);
+			SubmitCameraImageActivity.class);
 		startActivity(cameraSubmit);
 	    }
 	}
