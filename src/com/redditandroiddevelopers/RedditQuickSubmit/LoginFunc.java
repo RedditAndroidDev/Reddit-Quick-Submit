@@ -10,6 +10,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
 public class LoginFunc {
     
     public static void login(String u, String user, String pw) throws IOException {
@@ -34,17 +40,18 @@ public class LoginFunc {
         InputStream is = ycConnection.getInputStream();
         BufferedReader rd = new BufferedReader( new InputStreamReader( is ) );
         String line;
-        StringBuffer response = new StringBuffer();
+        String response = "";
         while ( ( line = rd.readLine() ) != null ) {
-            response.append( line );
-            response.append( '\r' );
+            response += line;
+            response += '\r';
         }
         for ( Entry< String, List< String >> r : ycConnection.getHeaderFields().entrySet() ) {
             System.out.println( r.getKey() + ": " + r.getValue());
         }
         rd.close();
         System.out.println( response.toString());
-        
     }
-    
 }
+
+
+
