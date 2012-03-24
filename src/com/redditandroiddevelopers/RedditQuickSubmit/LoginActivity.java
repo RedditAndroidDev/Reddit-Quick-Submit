@@ -19,28 +19,20 @@ public class LoginActivity extends Activity {
     // Start the main activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	
-	// Remove the title from the window; it doesn't look good. 
-	requestWindowFeature(Window.FEATURE_NO_TITLE); 
-	setContentView(R.layout.login);
-	
-	Button submitLinkButton = (Button) findViewById(R.id.submitLoginButton);
-	
-	// Get the EditTexts from the XML
-	final EditText username = (EditText) findViewById(R.id.usernameForm);
-	final EditText password = (EditText) findViewById(R.id.passwordForm);
-	
-	final String url = "https://ssl.reddit.com/api/login/" + username.getText().toString();
-
-	submitLinkButton.setOnClickListener(new OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
+		super.onCreate(savedInstanceState);
 		
-		/*
+		// Remove the title from the window; it doesn't look good. 
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		setContentView(R.layout.login);
+    }
+    
+    public void submitLoginButton_OnClick(View v) {
 		
-		// Doesn't work.. needs to be fixed
-		if (username.getText().toString() == ""){
+		// Get the EditTexts from the XML
+		final EditText username = (EditText) findViewById(R.id.usernameForm);
+		final EditText password = (EditText) findViewById(R.id.passwordForm);
+		
+		if (username.getText().toString().length() == 0){
 		    
 		    Context context = getApplicationContext();
 		    CharSequence text = "Please enter a username!";
@@ -48,8 +40,7 @@ public class LoginActivity extends Activity {
 		    Toast toast = Toast.makeText(context, text, duration);
 		    toast.show();
 		
-		// Doesn't work.. needs to be fixed
-		} else if (password.getText().toString() == ""){
+		} else if (password.getText().toString().length() == 0){
 		    
 		    Context context = getApplicationContext();
 		    CharSequence text = "Please enter a password!";
@@ -58,23 +49,29 @@ public class LoginActivity extends Activity {
 		    toast.show();
 		    
 		} else {
-		    
-                    try {
-                	LoginFunc.login(url, username.getText().toString(), password.getText().toString());
-                    } catch (IOException e) {
-                	e.printStackTrace();
-                    }
+			
+			final String url = "https://ssl.reddit.com/api/login/" + username.getText().toString();
+		    try {
+		    	LoginFunc func = new LoginFunc();
+		    	boolean loginSuccess = func.login(url, username.getText().toString(), password.getText().toString());
+		    	if(loginSuccess){
+		    		//Login successful, carry on
+		    		Intent myIntent = new Intent(v.getContext(),
+		    				RedditQuickSubmitActivity.class);
+		    		startActivityForResult(myIntent, 0);    		
+		    	}
+		    	else {
+		    		Context context = getApplicationContext();
+				    CharSequence text = "Error: " + func.getErrorMessage();
+				    int duration = Toast.LENGTH_SHORT;
+				    Toast toast = Toast.makeText(context, text, duration);
+				    toast.show();
+		    	}
+		    	
+	        } catch (IOException e) {
+	        	e.printStackTrace();
+	        }
 		}
-	
-		*/
-		
-		
-		Intent myIntent = new Intent(v.getContext(),
-			RedditQuickSubmitActivity.class);
-		startActivityForResult(myIntent, 0);
-		
-	    }
-	});
-    }
+	}
 }
 
