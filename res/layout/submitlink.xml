@@ -56,7 +56,7 @@
 
     <Button
         android:id="@+id/submitTextButton"
-        android:layout_width="150dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:text="Submit!" />

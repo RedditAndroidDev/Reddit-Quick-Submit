@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.loopj.android.http.PersistentCookieStore;
 import com.redditandroiddevelopers.RedditQuickSubmit.R;
 
 public class LoginActivity extends Activity {
@@ -26,6 +27,9 @@ public class LoginActivity extends Activity {
 	// Remove the title from the window; it doesn't look good.
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setContentView(R.layout.login);
+	
+	PersistentCookieStore myCookieStore = new PersistentCookieStore(this);
+	myCookieStore.getCookies();
 
 	instance = this;
 
