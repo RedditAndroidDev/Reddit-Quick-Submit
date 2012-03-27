@@ -24,11 +24,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
 
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import android.preference.PreferenceManager;
 
@@ -132,6 +138,19 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 			        }
 			        rd.close();
 			        System.out.println(response.toString());
+			        
+			        JsonParser parser = new JsonParser();
+			        JsonObject object = parser.parse(response).getAsJsonObject();
+			        JsonObject members = object.getAsJsonObject("jquery");
+			        
+			        finish();
+			        Toast.makeText(
+                    		getApplicationContext(),
+                            "submitted to reddit!",
+                            Toast.LENGTH_SHORT).show();
+			        
+			        
+			        
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -153,3 +172,5 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 	 
 	
 }
+
+
