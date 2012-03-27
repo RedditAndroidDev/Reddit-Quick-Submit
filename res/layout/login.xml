@@ -56,6 +56,6 @@
         android:layout_alignRight="@+id/passwordForm"
         android:gravity="center"
         android:text="Login!" 
-        android:onClick="onLoginClick"  />
+        android:onClick="onLoginButtonClick"  />
     
 </RelativeLayout>
