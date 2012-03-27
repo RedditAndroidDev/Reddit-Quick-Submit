@@ -90,8 +90,13 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 			String cookie = settings.getString("cookie", "");
 			String cookieValue = settings.getString("cookieValue", "");
 			
-	        String data = "&title=" + titleText.getText().toString() +"&text=" + titleText.getText().toString() +
-	        				"&sr=" + subRedditText.getText().toString() +"&sr=" + "self" +"&uh="+ modhash;
+	        String data = "?uh="+ modhash 
+	        				+"&kind=" + "self"  +
+	        				"&sr=" + subRedditText.getText().toString() +
+	        				"&title=" + titleText.getText().toString() +
+	        				"&text=" + bodyText.getText().toString()+
+	        				"&r=" + subRedditText.getText().toString() +
+	        				"&renderstyle=html";
 	        
 			
 			Log.v(TAG, "OUR DATA IS " + data);
