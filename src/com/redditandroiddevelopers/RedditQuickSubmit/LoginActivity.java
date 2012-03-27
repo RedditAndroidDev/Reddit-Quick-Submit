@@ -60,6 +60,29 @@ public class LoginActivity extends Activity {
 
         final Button Btn = (Button) findViewById(R.id.submitLoginButton);
         
+        
+        //check already login or not
+        
+        
+        boolean loginStatus = settings.getBoolean("haveAccount", false);
+        
+        if (loginStatus) {
+            
+            // Login successful, carry on
+            Intent myIntent = new Intent(getApplicationContext(),
+                    RedditQuickSubmitActivity.class);
+            startActivityForResult(myIntent, 0);
+
+        } else {
+                    Toast.makeText(
+                    		getApplicationContext(),
+                            "Please login first",
+                            Toast.LENGTH_SHORT).show();
+        }
+
+        
+        
+        
         Btn.setOnClickListener(new OnClickListener() {
             public void onClick(View v)  {            
             	
@@ -69,7 +92,11 @@ public class LoginActivity extends Activity {
 
                  final EditText username = (EditText) findViewById(R.id.usernameForm);
                  final EditText password = (EditText) findViewById(R.id.passwordForm);
+                 
+                 
                  new loginRun().execute();
+                 
+                 
             }
         });
     };
@@ -233,6 +260,7 @@ public class LoginActivity extends Activity {
 	 editor.putString("modhash", modhash);
 	  editor.putString("cookie", cookie);
 	  editor.putString("cookieValue", newCookie.toString());
+	  editor.putBoolean("haveAccount", true);
 	   editor.commit();
         
         return login_success;
