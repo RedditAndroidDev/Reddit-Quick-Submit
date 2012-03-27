@@ -202,6 +202,7 @@ public class LoginActivity extends Activity {
         }
 
         JsonObject dataObject = members.getAsJsonObject("data");
+        
         if (dataObject == null)
             return login_success;
 

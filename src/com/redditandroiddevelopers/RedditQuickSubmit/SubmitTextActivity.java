@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class SubmitTextActivity extends Activity {
 
     private static final String TAG = null;
     private String Cookie;
-    
+    private String response = "";
     //
     SharedPreferences settings;
     
@@ -72,9 +73,10 @@ public class SubmitTextActivity extends Activity {
 
 class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
     
+		JsonParser parser = new JsonParser();
 	    protected SubmitTextActivity doInBackground(String... urls) {
 
-	    	String u;
+	   
 			URL url = null;
 			try {
 				url = new URL("http://www.reddit.com/api/submit");
@@ -126,7 +128,7 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 			       is = ycConnection.getInputStream();
 			       BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 			        String line;
-			        String response = "";
+			        
 			        
 			        while ((line = rd.readLine()) != null) {
 			            response += line;
@@ -138,18 +140,12 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 			        }
 			        rd.close();
 			        System.out.println(response.toString());
+			       
+			       
+			   
+			      
 			        
-			        JsonParser parser = new JsonParser();
-			        JsonObject object = parser.parse(response).getAsJsonObject();
-			        JsonObject members = object.getAsJsonObject("jquery");
-			        
-			        finish();
-			        Toast.makeText(
-                    		getApplicationContext(),
-                            "submitted to reddit!",
-                            Toast.LENGTH_SHORT).show();
-			        
-			        
+			  
 			        
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -166,7 +162,16 @@ class submitLink extends AsyncTask<String, Void, SubmitTextActivity> {
 
 
 		protected void onPostExecute(SubmitTextActivity feed) {
-			
+		        
+		       
+		        Toast.makeText(
+              		getApplicationContext(),
+                      "submitted to reddit!",
+                      Toast.LENGTH_LONG).show();
+		       finish();
+		      Intent myIntent = new Intent(getApplicationContext(),
+	                       RedditQuickSubmitActivity.class);
+	               startActivityForResult(myIntent, 0);
 	    }
 	 }
 	 
