@@ -1,30 +1,13 @@
 package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import com.google.gson.JsonParser;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.PersistentCookieStore;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-import java.util.Map.Entry;
 
 public class SubmitLinkActivity extends Activity {
+    private static final String TAG = "SubLink";
+    private SharedPreferences settings;
+    private static final int LOGIN_RQ = 1;
 
     private static final String TAG = "SubLink";
     private static final int LOGIN_RQ = 1;
@@ -35,8 +18,9 @@ public class SubmitLinkActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hides the horrible
+                                                       // title at the top of
+                                                       // the app.
         setContentView(R.layout.submitlink);
 
         AsyncHttpClient myClient = new AsyncHttpClient();
