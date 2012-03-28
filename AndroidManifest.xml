@@ -19,32 +19,34 @@
         android:label="@string/app_name" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".RedditQuickSubmitActivity" >
         </activity>
-        <activity android:name=".SubmitTextActivity" >
+        <activity android:name=".SubmitTextActivity"
+                  android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".SubmitLinkActivity" >
+        <activity android:name=".SubmitLinkActivity"
+                  android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".SubmitCameraImageActivity" >
+        <activity android:name=".SubmitCameraImageActivity"
+                  android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".SubmitSharedImageActivity" >
+        <activity android:name=".SubmitSharedImageActivity"
+                  android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
