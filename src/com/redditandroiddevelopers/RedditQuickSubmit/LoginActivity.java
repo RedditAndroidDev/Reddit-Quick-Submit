@@ -58,25 +58,25 @@ public class LoginActivity extends Activity {
 	// Check already login or not
 	boolean loginStatus = settings.getBoolean("haveAccount", false);
 
-	if (loginStatus) {
+	 if (loginStatus) {
+         
+         // Login successful, carry on
+         Intent myIntent = new Intent(getApplicationContext(),
+                 RedditQuickSubmitActivity.class);
+         startActivityForResult(myIntent, 0);
 
-	    // Auto login successful, carry on
-	    Intent myIntent = new Intent(getApplicationContext(),
-		    RedditQuickSubmitActivity.class);
-	    startActivityForResult(myIntent, 0);
+     } else {
+                 Toast.makeText(
+                 		getApplicationContext(),
+                         "Please login first",
+                         Toast.LENGTH_SHORT).show();
+     }
 
-	}
     };
     
     public void onLoginButtonClick(View v){
 	
-	// Using this to bypass the login system for testing purposes
-	
-	Intent myIntent = new Intent(getApplicationContext(),
-		RedditQuickSubmitActivity.class);
-	startActivityForResult(myIntent, 0);
-	
-	// AsyncTask task = new LoginRun().execute();
+           new LoginRun().execute();
     }
 
     private class LoginRun extends AsyncTask<Void, Void, Void> {

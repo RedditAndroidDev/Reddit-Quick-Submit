@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -30,7 +31,7 @@ public class RedditQuickSubmitActivity extends Activity {
     public static String imageid;
     public static Intent data;
     public static Bitmap photo;
-
+    public static Uri imagePath;
     // Create the camera intent be be called later when the user selects the
     // camera
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -109,7 +110,9 @@ public class RedditQuickSubmitActivity extends Activity {
         if (requestCode == CAMERA_PIC_REQUEST) {
             if (data != null) {
                 photo = (Bitmap) data.getExtras().get("data");
-
+                
+                imagePath = (Uri) data.getData();
+                
                 Intent cameraSubmit = new Intent(
                         RedditQuickSubmitActivity.this,
                         SubmitCameraImageActivity.class);
