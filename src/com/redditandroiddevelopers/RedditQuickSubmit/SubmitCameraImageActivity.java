@@ -52,7 +52,7 @@ import android.widget.Toast;
 public class SubmitCameraImageActivity extends SubmitImageActivity {
 	private static final String TAG = null;
 	private ImageView imageView;
-	String imagePath;
+	
 	private ProgressDialog uploadDialog;
 	SharedPreferences settings;
 	private String response = "";
@@ -61,17 +61,19 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 
 		this.imageView = (ImageView) this.findViewById(R.id.cameraPhoto);
-		imageView.setImageBitmap(RedditQuickSubmitActivity.photo);
-		imagePath = RedditQuickSubmitActivity.imagePath.toString();
+		
+		imageView.setImageURI(RedditQuickSubmitActivity.imagePath);
 		
 		uploadDialog = new ProgressDialog(SubmitCameraImageActivity.this);
 	
 		settings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		Log.v(TAG, "ImagePath in URI = " + RedditQuickSubmitActivity.imagePath);
+		Log.v(TAG, "ImagePath in without file = " + RedditQuickSubmitActivity.imagePath.getPath());
 		
 		 final EditText title = (EditText) findViewById(R.id.titleForm);
 		 final EditText subreddit = (EditText) findViewById(R.id.subredditForm);
@@ -118,17 +120,16 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 		    }
 		
 		protected Long doInBackground(URL... urls) {
-			Bitmap imageToUpload = BitmapFactory
-			.decodeFile(getRealPathFromURI(RedditQuickSubmitActivity.imagePath));
-	
-		Log.v(TAG, "ImagePath POST in URI = "
-				+ getRealPathFromURI(RedditQuickSubmitActivity.imagePath));
+			Bitmap imageToUpload = BitmapFactory.decodeFile(RedditQuickSubmitActivity.imagePath.getPath());
+			
+		Log.v(TAG, "ImagePath POST in STRING = "
+				+ RedditQuickSubmitActivity.imagePath.toString());
 	
 		List<NameValuePair> postContent = new ArrayList<NameValuePair>(2);
 		postContent.add(new BasicNameValuePair("key",
 				"14b450817a15fe130a76bbaf156d692f"));
 		postContent.add(new BasicNameValuePair("image",
-				getRealPathFromURI(RedditQuickSubmitActivity.imagePath)));
+				RedditQuickSubmitActivity.imagePath.toString()));
 		 uploadDialog.setProgress(20);
 		 
 			String url = "http://api.imgur.com/2/upload";
@@ -260,9 +261,10 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 			return null;
 	}
 
-	public String getRealPathFromURI(Uri contentUri) {
+	public String getRealPathFromURI(String contentUri) {
 		String[] proj = { MediaStore.Images.Media.DATA };
-		Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+		
+		Cursor cursor = managedQuery(Uri.parse(contentUri), proj, null, null, null);
 		int column_index = cursor
 				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		cursor.moveToFirst();
