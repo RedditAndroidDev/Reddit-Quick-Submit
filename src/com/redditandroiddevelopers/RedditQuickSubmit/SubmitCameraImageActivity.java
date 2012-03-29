@@ -31,6 +31,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -337,6 +338,10 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 				uploadDialog.setProgress(100);
 				uploadDialog.dismiss();
 				
+				//post submitted, carry on!
+				Intent myIntent = new Intent(getApplicationContext(),
+						RedditQuickSubmitActivity.class);
+					startActivityForResult(myIntent, 0);
 				
 				
 			} catch (IOException e) {
