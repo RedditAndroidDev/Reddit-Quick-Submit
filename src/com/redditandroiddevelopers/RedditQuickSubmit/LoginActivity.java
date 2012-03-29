@@ -14,7 +14,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -22,8 +21,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -92,13 +89,13 @@ public class LoginActivity extends Activity {
 	        loginDialog.show();
 	    }
 	
-	@Override
+	
 	protected Void doInBackground(Void... unused) {
 
 	    return null;
 	}
 
-	@Override
+
 	protected void onPostExecute(Void unused) { 
 	    
 	    final EditText username = (EditText) findViewById(R.id.usernameForm);
@@ -236,14 +233,15 @@ public class LoginActivity extends Activity {
 	newCookie.setVersion(1);
 	newCookie.setDomain("reddit.com");
 	newCookie.setPath("/");
+	
 	myCookieStore.addCookie(newCookie);
 
 	// save cookie and modhash in sharedpreferences
 	SharedPreferences.Editor editor = settings.edit();
-	editor.putString("modhash", modhash);
-	editor.putString("cookie", cookie);
-	editor.putString("cookieValue", newCookie.toString());
-	editor.putBoolean("haveAccount", true);
+		editor.putString("modhash", modhash);
+		editor.putString("cookie", cookie);
+		editor.putString("cookieValue", newCookie.toString());
+		editor.putBoolean("haveAccount", true);
 	editor.commit();
 
 	return login_success;
