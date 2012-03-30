@@ -29,7 +29,6 @@ public class SubmitSharedImageActivity extends SubmitImageActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String action = intent.getAction();
-        // TODO: Check logged-in state before routing directly to image submit
 
         if (action.equals(Intent.ACTION_SEND)) {
             if (extras.containsKey(Intent.EXTRA_STREAM)) {
