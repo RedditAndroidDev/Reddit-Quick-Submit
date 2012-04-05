@@ -1,5 +1,18 @@
 package com.redditandroiddevelopers.RedditQuickSubmit;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.http.impl.cookie.BasicClientCookie;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -159,8 +172,8 @@ public class LoginActivity extends Activity {
 
         URL url = new URL(u);
 
-        System.out.println("Username: " + user + ", Password: " + pw);
-        String data = "api_type=json&user=" + user + "&passwd=" + pw;
+	System.out.println("Username: " + user + ", Password: " + pw);
+	String data = "api_type=json&user=" + user + "&passwd=" + pw;
 
         HttpURLConnection ycConnection = null;
         ycConnection = (HttpURLConnection) url.openConnection();
