@@ -35,10 +35,6 @@ public class RedditQuickSubmitActivity extends Activity {
     // Request codes
     public static final int CAMERA_PIC_REQUEST = 0;
 
-    private static final String TAG = null;
-
-    public static Intent data;
-    public static Bitmap photo;
     public static Uri imagePath;
 
     /**
