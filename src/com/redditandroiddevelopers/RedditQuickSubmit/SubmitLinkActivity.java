@@ -60,7 +60,7 @@ public class SubmitLinkActivity extends Activity {
             startActivityForResult(loginIntent, LOGIN_RQ);
         }
         
-        if(action.equals(Intent.ACTION_SEND)){
+        if(action != null && action.equals(Intent.ACTION_SEND)){
             Log.i(TAG,"Entering from Share");
             EditText uriText = (EditText) findViewById(R.id.linkForm);
             uriText.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
