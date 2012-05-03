@@ -40,9 +40,6 @@ public class RedditQuickSubmitActivity extends Activity {
     public static Intent data;
     public static Bitmap photo;
     public static Uri imagePath;
-    // Create the camera intent be be called later when the user selects the
-    // camera
-
 
     // Start the main activity
     @Override
