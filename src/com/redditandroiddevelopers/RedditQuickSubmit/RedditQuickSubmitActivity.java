@@ -1,4 +1,3 @@
-
 package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import java.io.File;
@@ -38,16 +37,15 @@ public class RedditQuickSubmitActivity extends Activity {
     // Create variables to be used by the camera intent
     public static final int CAMERA_PIC_REQUEST = 0;
 
-	private static final String TAG = null;
-	
-    
+    private static final String TAG = null;
+
     public static Intent data;
     public static Bitmap photo;
     public static Uri imagePath;
     // Create the camera intent be be called later when the user selects the
     // camera
     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-    
+
     // Start the main activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,7 @@ public class RedditQuickSubmitActivity extends Activity {
         alertDialog.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 if (item == 0) {
-                	cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getImageUri());
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getImageUri());
                     startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
                 } else if (item == 1) {
 
@@ -112,7 +110,7 @@ public class RedditQuickSubmitActivity extends Activity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(v.getContext(),
                         SubmitLinkActivity.class);
-                
+
                 startActivityForResult(myIntent, 0);
             }
         });
@@ -122,38 +120,35 @@ public class RedditQuickSubmitActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST) {
-        	  if (resultCode == Activity.RESULT_OK) {
-                
-        		//  photo = (Bitmap) data.getExtras().get("data");
-        		  
-        		  
-             Intent cameraSubmit = new Intent(
-                     RedditQuickSubmitActivity.this,
-                     SubmitCameraImageActivity.class);
-                
-               startActivity(cameraSubmit);
-               
-             } else if (resultCode == Activity.RESULT_CANCELED) {
-            	 Context context = getApplicationContext();
-                 CharSequence text = "Failed to get the image";
-                 int duration = Toast.LENGTH_SHORT;
+            if (resultCode == Activity.RESULT_OK) {
 
-                 Toast toast = Toast.makeText(context, text, duration);
-                 toast.show();
+                Intent cameraSubmit = new Intent(
+                        RedditQuickSubmitActivity.this,
+                        SubmitCameraImageActivity.class);
+
+                startActivity(cameraSubmit);
+
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Context context = getApplicationContext();
+                CharSequence text = "Failed to get the image";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         }
     }
-    
+
     private Uri getImageUri() {
-    	
-    	
-    	Date date = new Date();
+
+
+        Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("-mm-ss");
-        
-        String redditcapture = "redditquicksubmit" + df.format(date)+ ".jpg";
+
+        String redditcapture = "redditquicksubmit" + df.format(date) + ".jpg";
         // Store image in dcim
         File file = new File(Environment.getExternalStorageDirectory() + "/DCIM", redditcapture);
-        
+
         Uri imgUri = Uri.fromFile(file);
         imagePath = imgUri;
         return imgUri;
