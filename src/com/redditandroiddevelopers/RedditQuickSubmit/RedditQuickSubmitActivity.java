@@ -68,7 +68,7 @@ public class RedditQuickSubmitActivity extends Activity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(v.getContext(),
                         SubmitTextActivity.class);
-                startActivityForResult(myIntent, 0);
+                startActivity(myIntent);
             }
         });
 
@@ -79,7 +79,7 @@ public class RedditQuickSubmitActivity extends Activity {
                 Intent myIntent = new Intent(v.getContext(),
                         SubmitLinkActivity.class);
 
-                startActivityForResult(myIntent, 0);
+                startActivity(myIntent);
             }
         });
     }
