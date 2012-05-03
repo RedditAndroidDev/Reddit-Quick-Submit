@@ -6,6 +6,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,16 +26,13 @@ import android.widget.Toast;
 
 public class RedditQuickSubmitActivity extends Activity {
 
-    // Create a new instace of AlertDialog called 'alertDialog' to be used
-    // later.
-    private AlertDialog.Builder alertDialog;
-
-    // This is used for the AlertDialog
-    final CharSequence[] items = {
+    // Dialog identifiers and data
+    public static final int DIALOG_IMAGE = 0;
+    public static final CharSequence[] DIALOG_IMAGE_ITEMS = {
             "Camera", "Gallery"
     };
 
-    // Create variables to be used by the camera intent
+    // Request codes
     public static final int CAMERA_PIC_REQUEST = 0;
 
     private static final String TAG = null;
@@ -44,7 +42,7 @@ public class RedditQuickSubmitActivity extends Activity {
     public static Uri imagePath;
     // Create the camera intent be be called later when the user selects the
     // camera
-    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
 
     // Start the main activity
     @Override
@@ -59,38 +57,11 @@ public class RedditQuickSubmitActivity extends Activity {
         Button submitTextButton = (Button) findViewById(R.id.submitTextButton);
         Button submitLinkButton = (Button) findViewById(R.id.submitLinkButton);
 
-        // Create a new AlertDialog for the pop-up
-        alertDialog = new AlertDialog.Builder(this);
-
-        // Set its title
-        alertDialog.setTitle("Select Source");
-
-        // Open pop up menu when Camera button is clicked
-        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                if (item == 0) {
-                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getImageUri());
-                    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
-                } else if (item == 1) {
-
-                    // Display message when clicking on gallery. Someone is
-                    // working on this I believe.
-                    Context context = getApplicationContext();
-                    CharSequence text = "Gallery functionality will be added soon!";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
-        });
-
         // Listener for the Image button to open the corresponding activity
         submitImageButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog myalert = alertDialog.create();
-                myalert.show();
+                showDialog(DIALOG_IMAGE);
             }
         });
 
@@ -114,6 +85,34 @@ public class RedditQuickSubmitActivity extends Activity {
                 startActivityForResult(myIntent, 0);
             }
         });
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_IMAGE:
+                return new AlertDialog.Builder(this)
+                        .setTitle("Select source")
+                        .setItems(DIALOG_IMAGE_ITEMS, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (i == 0) {
+                                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getImageUri());
+                                    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+                                } else if (i == 1) {
+                                    // Display message when clicking on gallery. Someone is
+                                    // working on this I believe.
+                                    CharSequence text = "Gallery functionality will be added soon!";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(RedditQuickSubmitActivity.this, text, duration);
+                                    toast.show();
+                                }
+                            }
+                        }).create();
+        }
+        return super.onCreateDialog(id);
     }
 
     // This gets the result from the camera (i.e. the picture) when it is called
