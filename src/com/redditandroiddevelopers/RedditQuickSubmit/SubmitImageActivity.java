@@ -23,9 +23,6 @@ public abstract class SubmitImageActivity extends Activity {
             loginIntent.putExtra("needsLogin",true);
             startActivityForResult(loginIntent,LOGIN_RQ);
         }
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hides the horrible
-                                                       // title at the top of
-                                                       // the app.
         setContentView(R.layout.submitimage);
     }
     

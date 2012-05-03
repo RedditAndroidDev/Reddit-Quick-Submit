@@ -56,7 +56,6 @@ public class LoginActivity extends Activity {
         settings = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login);
 
         // Check already login or not

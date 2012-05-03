@@ -45,9 +45,6 @@ public class RedditQuickSubmitActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Remove the title from the window; it doesn't look good.
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
         Button submitImageButton = (Button) findViewById(R.id.submitImageButton);
