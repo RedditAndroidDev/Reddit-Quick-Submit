@@ -1,11 +1,6 @@
 package com.redditandroiddevelopers.RedditQuickSubmit;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,6 +46,11 @@ import android.widget.Toast;
 
 public class SubmitCameraImageActivity extends SubmitImageActivity {
 
+    /**
+     * Key for the image path in intent arguments
+     */
+    public static final String IMAGE_PATH = "IMAGE_PATH";
+
     private static final String TAG = null;
     private ImageView imageView;
 
@@ -59,6 +59,7 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
     private String response = "";
 
     private String imgurl = "";
+    private Uri mImageUri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,14 +68,13 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 
         this.imageView = (ImageView) this.findViewById(R.id.cameraPhoto);
 
-        imageView.setImageURI(RedditQuickSubmitActivity.imagePath);
+        mImageUri = Uri.fromFile(new File(getIntent().getExtras().getString(IMAGE_PATH)));
+        imageView.setImageURI(mImageUri);
 
         uploadDialog = new ProgressDialog(SubmitCameraImageActivity.this);
 
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Log.v(TAG, "ImagePath in URI = " + RedditQuickSubmitActivity.imagePath);
-        Log.v(TAG, "ImagePath in without file = " + RedditQuickSubmitActivity.imagePath.getPath());
 
         final EditText title = (EditText) findViewById(R.id.titleForm);
         final EditText subreddit = (EditText) findViewById(R.id.subredditForm);
@@ -97,7 +97,7 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 
                 } else {
 
-                    new uploadImageTask().execute();
+                    new uploadImageTask().execute(mImageUri);
                 }
             }
         });
@@ -105,7 +105,7 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
     }
 
     //uploading image
-    private class uploadImageTask extends AsyncTask<URL, Integer, Long> {
+    private class uploadImageTask extends AsyncTask<Uri, Integer, Long> {
 
 
         @Override
@@ -119,17 +119,18 @@ public class SubmitCameraImageActivity extends SubmitImageActivity {
 
         }
 
-        protected Long doInBackground(URL... urls) {
-            Bitmap imageToUpload = BitmapFactory.decodeFile(RedditQuickSubmitActivity.imagePath.getPath());
+        protected Long doInBackground(Uri... urls) {
+            Uri uri = urls[0];
+            Bitmap imageToUpload = BitmapFactory.decodeFile(uri.getPath());
 
             Log.v(TAG, "ImagePath POST in STRING = "
-                    + RedditQuickSubmitActivity.imagePath.toString());
+                    + uri.toString());
 
             List<NameValuePair> postContent = new ArrayList<NameValuePair>(2);
             postContent.add(new BasicNameValuePair("key",
                     "14b450817a15fe130a76bbaf156d692f"));
             postContent.add(new BasicNameValuePair("image",
-                    RedditQuickSubmitActivity.imagePath.toString()));
+                    uri.toString()));
             uploadDialog.setProgress(20);
 
             String url = "http://api.imgur.com/2/upload";

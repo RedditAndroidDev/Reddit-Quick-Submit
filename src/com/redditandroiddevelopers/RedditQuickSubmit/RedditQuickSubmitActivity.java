@@ -1,6 +1,7 @@
 package com.redditandroiddevelopers.RedditQuickSubmit;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,7 +36,7 @@ public class RedditQuickSubmitActivity extends Activity {
     // Request codes
     public static final int CAMERA_PIC_REQUEST = 0;
 
-    public static Uri imagePath;
+    private String mLastOutputPath = "";
 
     /**
      * Called when the activity is created.
@@ -99,7 +100,9 @@ public class RedditQuickSubmitActivity extends Activity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if (i == 0) {
                                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getImageUri());
+                                    Uri output = buildCameraOutputUri();
+                                    mLastOutputPath = output.getPath();
+                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, output);
                                     startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
                                 } else if (i == 1) {
                                     // Display message when clicking on gallery. Someone is
@@ -127,13 +130,11 @@ public class RedditQuickSubmitActivity extends Activity {
         if (requestCode == CAMERA_PIC_REQUEST) {
             // Returning from the camera
             if (resultCode == Activity.RESULT_OK) {
-
                 Intent cameraSubmit = new Intent(
                         RedditQuickSubmitActivity.this,
                         SubmitCameraImageActivity.class);
-
+                cameraSubmit.putExtra(SubmitCameraImageActivity.IMAGE_PATH, mLastOutputPath);
                 startActivity(cameraSubmit);
-
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Context context = getApplicationContext();
                 CharSequence text = "Failed to get the image";
@@ -147,11 +148,11 @@ public class RedditQuickSubmitActivity extends Activity {
 
     /**
      * Returns the path for a saved picture.
+     *
+     * TODO: Evaluate better options to avoid saving to filesystem: built-in camera?
      * @return Filesystem URI
      */
-    private Uri getImageUri() {
-
-
+    private Uri buildCameraOutputUri() {
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("-mm-ss");
 
@@ -159,8 +160,6 @@ public class RedditQuickSubmitActivity extends Activity {
         // Store image in dcim
         File file = new File(Environment.getExternalStorageDirectory() + "/DCIM", redditcapture);
 
-        Uri imgUri = Uri.fromFile(file);
-        imagePath = imgUri;
-        return imgUri;
+        return Uri.fromFile(file);
     }
 }
