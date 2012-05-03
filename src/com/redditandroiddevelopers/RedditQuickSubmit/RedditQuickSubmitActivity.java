@@ -41,7 +41,10 @@ public class RedditQuickSubmitActivity extends Activity {
     public static Bitmap photo;
     public static Uri imagePath;
 
-    // Start the main activity
+    /**
+     * Called when the activity is created.
+     * @param savedInstanceState saved state, if any
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,11 @@ public class RedditQuickSubmitActivity extends Activity {
         });
     }
 
+    /**
+     * Callback for creating dialogs.
+     * @param id dialog ID
+     * @return dialog
+     */
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -112,10 +120,16 @@ public class RedditQuickSubmitActivity extends Activity {
         return super.onCreateDialog(id);
     }
 
-    // This gets the result from the camera (i.e. the picture) when it is called
+    /**
+     * Handles the result of an started activity.
+     * @param requestCode request code
+     * @param resultCode result code
+     * @param data result data, if any
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST) {
+            // Returning from the camera
             if (resultCode == Activity.RESULT_OK) {
 
                 Intent cameraSubmit = new Intent(
@@ -135,6 +149,10 @@ public class RedditQuickSubmitActivity extends Activity {
         }
     }
 
+    /**
+     * Returns the path for a saved picture.
+     * @return Filesystem URI
+     */
     private Uri getImageUri() {
 
 
